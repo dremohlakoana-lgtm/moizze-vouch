@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Users — Moizze Admin</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <style>
+    .page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+    .search-bar { display:flex; gap:10px; }
+    .search-bar input { padding:10px 16px; border:1px solid var(--border); border-radius:10px; background:var(--card); color:var(--text); font-size:14px; width:240px; }
+    .user-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px; margin-bottom:16px; }
+    .user-card-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; }
+    .user-info h3 { font-size:16px; font-weight:600; margin-bottom:4px; }
+    .user-info p { font-size:13px; color:var(--text-muted); }
+    .user-meta { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+    .meta-item { font-size:13px; color:var(--text-muted); }
+    .meta-item span { font-weight:600; color:var(--text); }
+    .user-actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; }
+    .modal-overlay.active { display:flex; }
+    .modal { background:var(--card); border-radius:20px; padding:32px; width:100%; max-width:420px; }
+    .modal h3 { font-size:20px; font-weight:700; margin-bottom:20px; }
+    .modal-actions { display:flex; gap:12px; margin-top:24px; }
+    .empty-state { text-align:center; padding:60px 20px; color:var(--text-muted); }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">M</div>
+      <span>Moizze Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+      <a href="users.html" class="nav-item active"><span class="nav-icon">👥</span><span>Users</span></a>
+      <a href="withdrawals.html" class="nav-item"><span class="nav-icon">💸</span><span>Withdrawals</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-mini" id="adminMini"></div>
+      <button class="btn btn-outline btn-sm" onclick="logout()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <h1 class="page-title">Users</h1>
+    </div>
+
+    <div class="page-header">
+      <p style="color:var(--text-muted)" id="userCount">Loading...</p>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search name or email..." oninput="filterUsers()"/>
+      </div>
+    </div>
+
+    <div id="usersContainer">
+      <div class="loading-spinner" style="text-align:center;padding:60px">Loading users...</div>
+    </div>
+  </main>
+</div>
+
+<!-- Load Vouch Modal -->
+<div class="modal-overlay" id="loadModal">
+  <div class="modal">
+    <h3 id="loadModalTitle">Load Vouch</h3>
+    <div class="form-group">
+      <label class="form-label">Amount (V)</label>
+      <input type="number" class="form-input" id="loadAmount" placeholder="Enter amount" min="1"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <input type="text" class="form-input" id="loadDesc" placeholder="Reason for loading vouch"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('loadModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitLoadVouch()" id="loadBtn">Load Vouch</button>
+    </div>
+  </div>
+</div>
+
+<!-- Deduct Vouch Modal -->
+<div class="modal-overlay" id="deductModal">
+  <div class="modal">
+    <h3 id="deductModalTitle">Deduct Vouch</h3>
+    <div class="form-group">
+      <label class="form-label">Amount (V)</label>
+      <input type="number" class="form-input" id="deductAmount" placeholder="Enter amount" min="1"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <input type="text" class="form-input" id="deductDesc" placeholder="Reason for deduction"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('deductModal')">Cancel</button>
+      <button class="btn btn-danger" onclick="submitDeductVouch()" id="deductBtn">Deduct Vouch</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="../js/app.js"></script>
+<script>
+  let allUsers = [];
+  let selectedUserId = null;
+
+  requireAdmin();
+
+  const adminMini = document.getElementById('adminMini');
+  const user = getUser();
+  if (user) adminMini.innerHTML = `<strong>${escapeHtml(user.full_name)}</strong><br><small>${escapeHtml(user.email)}</small>`;
+
+  async function loadUsers() {
+    const res = await apiRequest('/api/admin/users');
+    if (res.users) {
+      allUsers = res.users;
+      document.getElementById('userCount').textContent = `${allUsers.length} total users`;
+      renderUsers(allUsers);
+    }
+  }
+
+  function renderUsers(users) {
+    const container = document.getElementById('usersContainer');
+    if (!users.length) {
+      container.innerHTML = '<div class="empty-state"><p>No users found</p></div>';
+      return;
+    }
+    container.innerHTML = users.map(u => `
+      <div class="user-card">
+        <div class="user-card-header">
+          <div class="user-info">
+            <h3>${escapeHtml(u.full_name)}</h3>
+            <p>${escapeHtml(u.email)} • ${escapeHtml(u.phone || 'No phone')}</p>
+          </div>
+          <span class="badge ${u.is_active ? 'badge-success' : 'badge-danger'}">${u.is_active ? 'Active' : 'Inactive'}</span>
+        </div>
+        <div class="user-meta">
+          <div class="meta-item">Account: <span class="font-mono">${u.account_number}</span></div>
+          <div class="meta-item">Balance: <span style="color:var(--accent)">V ${formatNumber(u.vouch_balance)}</span></div>
+          <div class="meta-item">Role: <span>${u.role}</span></div>
+          <div class="meta-item">Joined: <span>${formatDate(u.created_at)}</span></div>
+        </div>
+        <div class="user-actions">
+          <button class="btn btn-primary btn-sm" onclick="openLoadModal(${u.id}, '${escapeHtml(u.full_name)}')">➕ Load Vouch</button>
+          <button class="btn btn-outline btn-sm" onclick="openDeductModal(${u.id}, '${escapeHtml(u.full_name)}')">➖ Deduct Vouch</button>
+          <button class="btn ${u.is_active ? 'btn-danger' : 'btn-success'} btn-sm" onclick="toggleUser(${u.id}, ${u.is_active})">${u.is_active ? '🚫 Disable' : '✅ Enable'}</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filterUsers() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = allUsers.filter(u =>
+      u.full_name.toLowerCase().includes(q) ||
+      u.email.toLowerCase().includes(q) ||
+      u.account_number.includes(q)
+    );
+    renderUsers(filtered);
+  }
+
+  function openLoadModal(userId, name) {
+    selectedUserId = userId;
+    document.getElementById('loadModalTitle').textContent = `Load Vouch — ${name}`;
+    document.getElementById('loadAmount').value = '';
+    document.getElementById('loadDesc').value = '';
+    document.getElementById('loadModal').classList.add('active');
+  }
+
+  function openDeductModal(userId, name) {
+    selectedUserId = userId;
+    document.getElementById('deductModalTitle').textContent = `Deduct Vouch — ${name}`;
+    document.getElementById('deductAmount').value = '';
+    document.getElementById('deductDesc').value = '';
+    document.getElementById('deductModal').classList.add('active');
+  }
+
+  function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+  async function submitLoadVouch() {
+    const amount = parseFloat(document.getElementById('loadAmount').value);
+    const description = document.getElementById('loadDesc').value;
+    if (!amount || amount <= 0) return showToast('Enter a valid amount', 'error');
+    const btn = document.getElementById('loadBtn');
+    btn.disabled = true; btn.textContent = 'Loading...';
+    const res = await apiRequest(`/api/admin/users/${selectedUserId}/load-vouch`, 'POST', { amount, description });
+    btn.disabled = false; btn.textContent = 'Load Vouch';
+    if (res.message) {
+      showToast('Vouch loaded successfully!', 'success');
+      closeModal('loadModal');
+      loadUsers();
+    } else {
+      showToast(res.error || 'Failed to load vouch', 'error');
+    }
+  }
+
+  async function submitDeductVouch() {
+    const amount = parseFloat(document.getElementById('deductAmount').value);
+    const description = document.getElementById('deductDesc').value;
+    if (!amount || amount <= 0) return showToast('Enter a valid amount', 'error');
+    const btn = document.getElementById('deductBtn');
+    btn.disabled = true; btn.textContent = 'Deducting...';
+    const res = await apiRequest(`/api/admin/users/${selectedUserId}/deduct-vouch`, 'POST', { amount, description });
+    btn.disabled = false; btn.textContent = 'Deduct Vouch';
+    if (res.message) {
+      showToast('Vouch deducted successfully!', 'success');
+      closeModal('deductModal');
+      loadUsers();
+    } else {
+      showToast(res.error || 'Failed to deduct vouch', 'error');
+    }
+  }
+
+  async function toggleUser(userId, currentStatus) {
+    const res = await apiRequest(`/api/admin/users/${userId}/toggle-active`, 'PUT');
+    if (res.message) {
+      showToast(`User ${currentStatus ? 'disabled' : 'enabled'} successfully`, 'success');
+      loadUsers();
+    } else {
+      showToast(res.error || 'Action failed', 'error');
+    }
+  }
+
+  function formatNumber(n) { return parseFloat(n).toLocaleString('en-US', { minimumFractionDigits: 2 }); }
+  function formatDate(d) { return new Date(d).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }); }
+
+  loadUsers();
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: moizzen
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: moizze-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: PAYSTACK_PUBLIC_KEY
+        sync: false
+      - key: VOUCH_RATE
+        value: "1"
+      - key: ADMIN_EMAIL
+        value: admin@moizze.com
+
+databases:
+  - name: moizze-db
+    databaseName: moizze
+    user: moizze

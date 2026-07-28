@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Moizze</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app-container">
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-text">Moizze</div>
+      <div class="sidebar-logo-sub">Vouch Banking</div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="/dashboard.html" class="nav-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Dashboard
+      </a>
+      <a href="/send.html" class="nav-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+        Send Vouch
+      </a>
+      <a href="/deposit.html" class="nav-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
+        Buy Vouch
+      </a>
+      <a href="/withdraw.html" class="nav-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        Withdraw
+      </a>
+      <a href="/transactions.html" class="nav-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        Transactions
+      </a>
+      <div class="nav-section-label" style="margin-top:12px">Account</div>
+      <a href="/profile.html" class="nav-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        Profile
+      </a>
+      <a href="#" class="nav-item" data-action="logout">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        Sign Out
+      </a>
+    </div>
+    <div class="sidebar-footer">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="avatar" id="headerAvatar">?</div>
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--text)" id="headerUserName">Loading...</div>
+          <div style="font-size:12px;color:var(--text-dim)" id="headerRole"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button class="menu-toggle" id="menuToggle">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <div>
+          <div class="page-title">Dashboard</div>
+          <div class="page-subtitle" id="greetingText">Welcome back!</div>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <div class="notif-bell" id="notifBell">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <div class="notif-badge hidden" id="notifBadge">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Balance Card -->
+    <div class="balance-card">
+      <div class="balance-label">Vouch Balance</div>
+      <div class="balance-amount" id="balanceAmount"><span>V</span><span id="balanceNumber">—</span></div>
+      <div class="balance-account" id="accountNumber">Account: Loading...</div>
+      <div style="margin-top:20px">
+        <span style="font-size:12px;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.1);padding:4px 12px;border-radius:20px">
+          1 Vouch ≈ ₦1.00
+        </span>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <a href="/send.html" class="action-btn">
+        <div class="action-icon" style="background:rgba(64,145,108,0.15);color:var(--accent)">↗</div>
+        <span class="action-label">Send</span>
+      </a>
+      <a href="/deposit.html" class="action-btn">
+        <div class="action-icon" style="background:rgba(46,204,113,0.15);color:var(--green)">⬇</div>
+        <span class="action-label">Buy Vouch</span>
+      </a>
+      <a href="/withdraw.html" class="action-btn">
+        <div class="action-icon" style="background:rgba(241,196,15,0.15);color:var(--yellow)">⬆</div>
+        <span class="action-label">Withdraw</span>
+      </a>
+      <a href="/transactions.html" class="action-btn">
+        <div class="action-icon" style="background:rgba(52,152,219,0.15);color:#3498db">≡</div>
+        <span class="action-label">History</span>
+      </a>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Recent Transactions</div>
+        <a href="/transactions.html" style="font-size:14px;color:var(--accent)">View all</a>
+      </div>
+      <div id="txnContainer">
+        <div class="loading-spinner"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Bottom Nav (mobile) -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-items">
+    <a href="/dashboard.html" class="bottom-nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      Home
+    </a>
+    <a href="/send.html" class="bottom-nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+      Send
+    </a>
+    <a href="/deposit.html" class="bottom-nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
+      Buy
+    </a>
+    <a href="/transactions.html" class="bottom-nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      History
+    </a>
+    <a href="/profile.html" class="bottom-nav-item">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      Profile
+    </a>
+  </div>
+</nav>
+
+<script src="/js/app.js"></script>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

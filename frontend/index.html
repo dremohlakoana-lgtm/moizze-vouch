@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moizze — Vouch Banking</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+      max-width: 600px;
+    }
+    .feature-item {
+      text-align: center;
+      padding: 16px 12px;
+      background: var(--surface-2);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .feature-icon { font-size: 24px; margin-bottom: 8px; }
+    .feature-text { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+    .landing-split { display: flex; gap: 48px; align-items: center; max-width: 1100px; width: 100%; }
+    .landing-left { flex: 1; }
+    .landing-tagline { font-size: 48px; font-weight: 900; line-height: 1.1; margin-bottom: 16px; }
+    .landing-tagline span { background: linear-gradient(135deg, var(--accent), var(--light-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .landing-desc { font-size: 17px; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; }
+    .landing-right { flex: 0 0 440px; }
+    @media (max-width: 900px) {
+      .landing-split { flex-direction: column; }
+      .landing-right { flex: 1; width: 100%; max-width: 440px; }
+      .landing-tagline { font-size: 36px; }
+      .features { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .features { grid-template-columns: repeat(3, 1fr); }
+      .landing-tagline { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+<div class="landing-hero">
+  <div class="landing-split">
+    <div class="landing-left">
+      <div style="font-size:32px;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--light-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:24px">Moizze</div>
+      <div class="landing-tagline">
+        Bank smarter with<br><span>Vouch</span> currency
+      </div>
+      <div class="landing-desc">
+        Send, receive, and manage Vouch instantly. The modern way to transact — fast, secure, and built for everyone.
+      </div>
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-text">Instant Transfers</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-text">Bank-Grade Security</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💳</div>
+          <div class="feature-text">Easy Deposits</div>
+        </div>
+      </div>
+    </div>
+    <div class="landing-right">
+      <div class="auth-card">
+        <div class="auth-logo">
+          <div class="auth-logo-text">Moizze</div>
+          <div class="auth-logo-sub">Vouch Banking Platform</div>
+        </div>
+
+        <div class="auth-tabs">
+          <div class="auth-tab active" id="loginTab" onclick="switchTab('login')">Sign In</div>
+          <div class="auth-tab" id="registerTab" onclick="switchTab('register')">Create Account</div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Your password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="loginBtn">Sign In</button>
+          <p class="text-center mt-16" style="font-size:13px;color:var(--text-dim)">
+            Don't have an account? <a href="#" onclick="switchTab('register');return false;">Create one</a>
+          </p>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" class="hidden">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="regName" class="form-control" placeholder="John Doe" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="regEmail" class="form-control" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number <span style="color:var(--text-dim)">(optional)</span></label>
+            <input type="tel" id="regPhone" class="form-control" placeholder="+234 800 000 0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="regPassword" class="form-control" placeholder="Min 6 characters" required autocomplete="new-password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="registerBtn">Create Account</button>
+          <p class="text-center mt-16" style="font-size:13px;color:var(--text-dim)">
+            Already have an account? <a href="#" onclick="switchTab('login');return false;">Sign in</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/app.js"></script>
+<script>
+  // Redirect if already logged in
+  if (Auth.isLoggedIn()) {
+    const user = Auth.getUser();
+    if (user && user.role === 'admin') {
+      window.location.href = '/admin/dashboard.html';
+    } else {
+      window.location.href = '/dashboard.html';
+    }
+  }
+
+  function switchTab(tab) {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const loginTab = document.getElementById('loginTab');
+    const registerTab = document.getElementById('registerTab');
+
+    if (tab === 'login') {
+      loginForm.classList.remove('hidden');
+      registerForm.classList.add('hidden');
+      loginTab.classList.add('active');
+      registerTab.classList.remove('active');
+    } else {
+      loginForm.classList.add('hidden');
+      registerForm.classList.remove('hidden');
+      loginTab.classList.remove('active');
+      registerTab.classList.add('active');
+    }
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    setLoading(btn, true);
+    try {
+      const res = await api.post('/auth/login', {
+        email: document.getElementById('loginEmail').value,
+        password: document.getElementById('loginPassword').value,
+      }, true);
+
+      if (res && res.success) {
+        Auth.setSession(res.token, res.user);
+        showToast('Welcome back, ' + res.user.full_name + '!', 'success');
+        setTimeout(() => {
+          if (res.user.role === 'admin') {
+            window.location.href = '/admin/dashboard.html';
+          } else {
+            window.location.href = '/dashboard.html';
+          }
+        }, 800);
+      } else {
+        showToast(res?.message || 'Login failed', 'error');
+      }
+    } catch (err) {
+      showToast('Connection error. Please try again.', 'error');
+    } finally {
+      setLoading(btn, false);
+    }
+  });
+
+  document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('registerBtn');
+    setLoading(btn, true);
+    try {
+      const res = await api.post('/auth/register', {
+        full_name: document.getElementById('regName').value,
+        email: document.getElementById('regEmail').value,
+        phone: document.getElementById('regPhone').value || undefined,
+        password: document.getElementById('regPassword').value,
+      }, true);
+
+      if (res && res.success) {
+        Auth.setSession(res.token, res.user);
+        showToast('Account created! Welcome to Moizze 🎉', 'success');
+        setTimeout(() => {
+          window.location.href = '/dashboard.html';
+        }, 800);
+      } else {
+        showToast(res?.message || 'Registration failed', 'error');
+      }
+    } catch (err) {
+      showToast('Connection error. Please try again.', 'error');
+    } finally {
+      setLoading(btn, false);
+    }
+  });
+
+  // Override DOM content loaded — no auth check on landing
+  document.removeEventListener('DOMContentLoaded', () => {});
+</script>
+</body>
+</html>
