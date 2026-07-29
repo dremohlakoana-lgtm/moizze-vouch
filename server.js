@@ -7,9 +7,12 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// ─── Trust Proxy (required for Render) ───────────────────────────────────────
+app.set('trust proxy', 1);
+
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? false : '*',
+  origin: '*',
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
