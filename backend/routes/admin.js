@@ -476,4 +476,64 @@ router.put('/withdrawals/:id/reject', adminAuth, [
   }
 });
 
+// ─── Invite Codes ────────────────────────────────────────────────────────────
+
+// Generate invite codes
+router.post('/invite-codes/generate', adminAuth, [
+  body('count').optional().isInt({ min: 1, max: 50 }).withMessage('Count must be 1-50'),
+  body('expires_days').optional().isInt({ min: 1 }).withMessage('Expiry must be at least 1 day'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).json({ success: false, message: errors.array()[0].msg });
+
+  try {
+    const count = parseInt(req.body.count) || 1;
+    const expiresDays = req.body.expires_days ? parseInt(req.body.expires_days) : null;
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous chars
+    const codes = [];
+
+    for (let i = 0; i < count; i++) {
+      let code = 'MZZ-';
+      for (let j = 0; j < 8; j++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+      const expiresAt = expiresDays ? new Date(Date.now() + expiresDays * 86400000) : null;
+      const r = await pool.query(
+        `INSERT INTO invite_codes (code, created_by, expires_at) VALUES ($1, $2, $3) RETURNING *`,
+        [code, req.user.id, expiresAt]
+      );
+      codes.push(r.rows[0]);
+    }
+
+    res.json({ success: true, codes, message: `${count} invite code(s) generated.` });
+  } catch (error) {
+    console.error('Generate invite codes error:', error);
+    res.status(500).json({ success: false, message: 'Failed to generate invite codes.' });
+  }
+});
+
+// List all invite codes
+router.get('/invite-codes', adminAuth, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT ic.*, u.full_name AS used_by_name, u.email AS used_by_email
+       FROM invite_codes ic
+       LEFT JOIN users u ON ic.used_by = u.id
+       ORDER BY ic.created_at DESC LIMIT 100`
+    );
+    res.json({ success: true, codes: result.rows });
+  } catch (error) {
+    console.error('List invite codes error:', error);
+    res.status(500).json({ success: false, message: 'Failed to get invite codes.' });
+  }
+});
+
+// Delete invite code
+router.delete('/invite-codes/:id', adminAuth, async (req, res) => {
+  try {
+    await pool.query('DELETE FROM invite_codes WHERE id = $1 AND is_used = false', [req.params.id]);
+    res.json({ success: true, message: 'Invite code deleted.' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Failed to delete invite code.' });
+  }
+});
+
 module.exports = router;

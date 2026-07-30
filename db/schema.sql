@@ -8,10 +8,21 @@ CREATE TABLE IF NOT EXISTS users (
   password_hash VARCHAR(255) NOT NULL,
   role VARCHAR(20) DEFAULT 'user',
   vouch_balance DECIMAL(15,2) DEFAULT 0.00,
-  account_number VARCHAR(10) UNIQUE,
+  account_number VARCHAR(16) UNIQUE,
   is_active BOOLEAN DEFAULT true,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS invite_codes (
+  id SERIAL PRIMARY KEY,
+  code VARCHAR(20) UNIQUE NOT NULL,
+  is_used BOOLEAN DEFAULT false,
+  created_by INTEGER REFERENCES users(id),
+  used_by INTEGER REFERENCES users(id),
+  used_at TIMESTAMP,
+  expires_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS transactions (

@@ -113,6 +113,11 @@
             <label class="form-label">Password</label>
             <input type="password" id="regPassword" class="form-control" placeholder="Min 6 characters" required autocomplete="new-password">
           </div>
+          <div class="form-group">
+            <label class="form-label">Invitation Code</label>
+            <input type="text" id="regInviteCode" class="form-control" placeholder="e.g. MZZ-XXXXXXXX" required autocomplete="off" style="letter-spacing:2px;text-transform:uppercase">
+            <div style="font-size:11px;color:var(--text-dim);margin-top:4px">You need an invitation code to join Moizze.</div>
+          </div>
           <button type="submit" class="btn btn-primary btn-full" id="registerBtn">Create Account</button>
           <p class="text-center mt-16" style="font-size:13px;color:var(--text-dim)">
             Already have an account? <a href="#" onclick="switchTab('login');return false;">Sign in</a>
@@ -194,6 +199,7 @@
         email: document.getElementById('regEmail').value,
         phone: document.getElementById('regPhone').value || undefined,
         password: document.getElementById('regPassword').value,
+        invite_code: document.getElementById('regInviteCode').value.trim().toUpperCase(),
       }, true);
 
       if (res && res.success) {

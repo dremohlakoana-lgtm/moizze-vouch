@@ -6,12 +6,15 @@ const { body, validationResult } = require('express-validator');
 const pool = require('../config/db');
 const authMiddleware = require('../middleware/auth');
 
-// Generate unique 10-digit account number
+// Generate unique 16-digit account number (South Africa format)
 async function generateAccountNumber() {
   let accountNumber;
   let isUnique = false;
   while (!isUnique) {
-    accountNumber = Math.floor(1000000000 + Math.random() * 9000000000).toString();
+    // 16 digits: prefix 6277 (ZA Moizze) + 12 random digits
+    const prefix = '6277';
+    const random = Math.floor(100000000000 + Math.random() * 900000000000).toString();
+    accountNumber = prefix + random;
     const result = await pool.query('SELECT id FROM users WHERE account_number = $1', [accountNumber]);
     if (result.rows.length === 0) isUnique = true;
   }
@@ -24,6 +27,7 @@ router.post('/register', [
   body('email').isEmail().normalizeEmail().withMessage('Valid email is required'),
   body('phone').optional().trim().isLength({ min: 7, max: 20 }),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+  body('invite_code').trim().notEmpty().withMessage('Invitation code is required'),
 ], async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -31,7 +35,17 @@ router.post('/register', [
       return res.status(400).json({ success: false, errors: errors.array(), message: errors.array()[0].msg });
     }
 
-    const { full_name, email, phone, password } = req.body;
+    const { full_name, email, phone, password, invite_code } = req.body;
+
+    // Validate invite code
+    const inviteResult = await pool.query(
+      `SELECT * FROM invite_codes WHERE code = $1 AND is_used = false AND (expires_at IS NULL OR expires_at > NOW())`,
+      [invite_code.toUpperCase()]
+    );
+    if (inviteResult.rows.length === 0) {
+      return res.status(400).json({ success: false, message: 'Invalid or expired invitation code.' });
+    }
+    const invite = inviteResult.rows[0];
 
     // Check if email exists
     const existing = await pool.query('SELECT id FROM users WHERE email = $1', [email]);
@@ -54,6 +68,13 @@ router.post('/register', [
     );
 
     const user = result.rows[0];
+
+    // Mark invite code as used
+    await pool.query(
+      `UPDATE invite_codes SET is_used = true, used_by = $1, used_at = NOW() WHERE id = $2`,
+      [user.id, invite.id]
+    );
+
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
     res.status(201).json({
