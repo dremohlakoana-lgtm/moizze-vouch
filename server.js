@@ -88,7 +88,7 @@ app.listen(PORT, () => {
   console.log(`✅ Running on port ${PORT}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔗 http://localhost:${PORT}\n`);
-  if (process.env.NODE_ENV === 'production') startKeepAlive();
+  startKeepAlive();
 });
 
 module.exports = app;
