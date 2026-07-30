@@ -14,6 +14,10 @@ app.use(express.static(path.join(__dirname, 'frontend')));
 // ─── Serve World Reports ──────────────────────────────────────────────────────
 app.use('/world', express.static(path.join(__dirname, 'world')));
 
+// ─── Leads API
+const leadsRoutes = require('./backend/routes/leads');
+app.use('/api/leads', leadsRoutes);
+
 // ─── Health Check ─────────────────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
   res.json({ success: true, status: 'ok', timestamp: new Date().toISOString() });

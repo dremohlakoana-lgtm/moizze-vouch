@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SA Business Leads — Moizze World</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <style>
+    .leads-hero {
+      background: radial-gradient(ellipse at center, #1a2e1a 0%, var(--bg) 70%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 20px 36px;
+      text-align: center;
+    }
+    .leads-title { font-size: 36px; font-weight: 900; margin-bottom: 8px; }
+    .leads-title span { background: linear-gradient(135deg,#22c55e,#16a34a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .leads-sub { color: var(--text-dim); font-size: 15px; margin-bottom: 20px; }
+    .leads-stats { display:flex; gap:24px; justify-content:center; flex-wrap:wrap; }
+    .stat-pill { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:6px 18px; font-size:13px; }
+    .stat-pill strong { color:var(--text); }
+
+    .leads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+    }
+    .lead-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .lead-card:hover { border-color: #22c55e55; transform: translateY(-2px); }
+    .lead-card.sold { opacity: 0.6; }
+    .lead-top { padding: 20px 20px 14px; }
+    .lead-sector {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: #22c55e; margin-bottom: 8px;
+    }
+    .lead-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; color: var(--text); }
+    .lead-name.hidden-name {
+      font-size: 14px; font-weight: 600;
+      background: var(--border); border-radius: 6px;
+      color: transparent; user-select: none;
+      padding: 4px 10px; display: inline-block;
+    }
+    .lead-location { font-size: 13px; color: var(--text-dim); margin-bottom: 12px; }
+    .lead-need {
+      font-size: 13px; color: var(--text-muted); line-height: 1.6;
+      background: var(--bg); border-radius: 10px; padding: 12px 14px;
+      border-left: 3px solid #22c55e;
+    }
+    .lead-need-label { font-size: 11px; font-weight: 700; color: #22c55e; margin-bottom: 4px; }
+    .lead-bottom {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .lead-price { font-size: 22px; font-weight: 900; color: var(--text); }
+    .lead-price span { font-size: 12px; color: var(--text-dim); font-weight: 400; }
+    .buy-btn {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff; border: none;
+      padding: 10px 20px; border-radius: 10px;
+      font-size: 14px; font-weight: 700;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .buy-btn:hover { opacity: 0.9; }
+    .buy-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .sold-badge {
+      background: #ffffff11; color: var(--text-dim);
+      padding: 8px 16px; border-radius: 10px;
+      font-size: 13px; font-weight: 600;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7); z-index: 1000;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px; max-width: 440px; width: 100%;
+    }
+    .modal-title { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .modal-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 24px; }
+    .modal-lead-info {
+      background: var(--bg); border-radius: 10px; padding: 14px;
+      margin-bottom: 20px; font-size: 13px; line-height: 1.7;
+    }
+    .modal-price { font-size: 28px; font-weight: 900; color: #22c55e; margin-bottom: 20px; }
+    .modal-price span { font-size: 13px; color: var(--text-dim); font-weight: 400; }
+    .modal-input { width:100%; margin-bottom:14px; }
+    .modal-actions { display:flex; gap:12px; }
+    .btn-cancel {
+      flex:1; background:transparent; border:1px solid var(--border);
+      color:var(--text-muted); padding:12px; border-radius:10px;
+      font-size:14px; cursor:pointer;
+    }
+    .btn-pay {
+      flex:2; background:linear-gradient(135deg,#22c55e,#16a34a);
+      color:#fff; border:none; padding:12px; border-radius:10px;
+      font-size:14px; font-weight:700; cursor:pointer;
+    }
+    .btn-pay:disabled { opacity:0.5; cursor:not-allowed; }
+
+    /* Success */
+    .success-card {
+      background: #22c55e11; border: 1px solid #22c55e33;
+      border-radius: 16px; padding: 24px; margin: 40px auto;
+      max-width: 600px; text-align: center;
+    }
+    .back-link {
+      display: inline-block; margin: 20px auto;
+      color: var(--accent); font-size: 14px; text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="leads-hero">
+  <div class="leads-title">🔍 SA <span>Business Leads</span></div>
+  <div class="leads-sub">Fresh leads every Monday. Pay R150 to unlock full business details.</div>
+  <div class="leads-stats">
+    <div class="stat-pill">📅 Updated <strong id="weekLabel">weekly</strong></div>
+    <div class="stat-pill">💼 <strong id="leadCount">5</strong> leads this week</div>
+    <div class="stat-pill">💰 <strong>R150</strong> per lead</div>
+    <div class="stat-pill"><a href="/" style="color:var(--accent)">← Back to Moizze World</a></div>
+  </div>
+</div>
+
+<!-- Verify success banner -->
+<div id="verifyBanner" style="display:none"></div>
+
+<div class="leads-grid" id="leadsGrid">
+  <div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-dim)">Loading leads...</div>
+</div>
+
+<!-- Buy Modal -->
+<div class="modal-overlay" id="buyModal">
+  <div class="modal">
+    <div class="modal-title">Unlock This Lead</div>
+    <div class="modal-sub">Pay once. Get full business name, sector, and contact guidance.</div>
+    <div class="modal-lead-info" id="modalLeadInfo"></div>
+    <div class="modal-price">R150 <span>once-off</span></div>
+    <input type="email" id="buyerEmail" class="form-control modal-input" placeholder="Your email (receipt + lead sent here)" required/>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-pay" id="payBtn" onclick="pay()">💳 Pay R150</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentLeadId = null;
+let currentLead = null;
+
+function escapeHtml(s) {
+  const d = document.createElement('div');
+  d.appendChild(document.createTextNode(String(s||'')));
+  return d.innerHTML;
+}
+
+async function loadLeads() {
+  try {
+    const res = await fetch('/api/leads');
+    const data = await res.json();
+    if (!data.success) throw new Error();
+
+    if (data.week) {
+      document.getElementById('weekLabel').textContent =
+        new Date(data.week).toLocaleDateString('en-ZA', { day:'numeric', month:'short', year:'numeric' });
+    }
+    document.getElementById('leadCount').textContent = data.leads.length;
+
+    const grid = document.getElementById('leadsGrid');
+    if (!data.leads.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-dim)">No leads this week yet. Check back Monday.</div>';
+      return;
+    }
+
+    grid.innerHTML = data.leads.map(lead => `
+      <div class="lead-card ${lead.is_sold ? 'sold' : ''}">
+        <div class="lead-top">
+          <div class="lead-sector">${escapeHtml(lead.sector)}</div>
+          ${lead.name
+            ? `<div class="lead-name">${escapeHtml(lead.name)}</div>`
+            : `<div class="lead-name hidden-name">████████████</div>`
+          }
+          <div class="lead-location">📍 ${escapeHtml(lead.location)}</div>
+          <div class="lead-need">
+            <div class="lead-need-label">NEEDS</div>
+            ${escapeHtml(lead.digital_need)}
+          </div>
+        </div>
+        <div class="lead-bottom">
+          <div class="lead-price">R${lead.price_zar} <span>/ lead</span></div>
+          ${lead.is_sold
+            ? '<span class="sold-badge">✅ Purchased</span>'
+            : `<button class="buy-btn" onclick='openModal(${JSON.stringify(lead)})'>Unlock Lead →</button>`
+          }
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    document.getElementById('leadsGrid').innerHTML =
+      '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-dim)">Could not load leads. Try refreshing.</div>';
+  }
+}
+
+function openModal(lead) {
+  currentLeadId = lead.id;
+  currentLead = lead;
+  document.getElementById('modalLeadInfo').innerHTML = `
+    <strong>Sector:</strong> ${escapeHtml(lead.sector)}<br>
+    <strong>Location:</strong> ${escapeHtml(lead.location)}<br>
+    <strong>Needs:</strong> ${escapeHtml(lead.digital_need)}<br>
+    <strong>Name:</strong> <em>Revealed after payment</em>
+  `;
+  document.getElementById('buyModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('buyModal').classList.remove('open');
+  currentLeadId = null;
+}
+
+async function pay() {
+  const email = document.getElementById('buyerEmail').value.trim();
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  const btn = document.getElementById('payBtn');
+  btn.disabled = true;
+  btn.textContent = 'Processing...';
+
+  try {
+    const res = await fetch('/api/leads/buy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lead_id: currentLeadId, email })
+    });
+    const data = await res.json();
+
+    if (data.success && data.payment_url) {
+      window.location.href = data.payment_url;
+    } else {
+      alert(data.message || 'Payment failed. Try again.');
+      btn.disabled = false;
+      btn.textContent = '💳 Pay R150';
+    }
+  } catch(e) {
+    alert('Connection error. Try again.');
+    btn.disabled = false;
+    btn.textContent = '💳 Pay R150';
+  }
+}
+
+// Auto-verify on return from Paystack
+async function checkVerify() {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('verify');
+  const leadId = params.get('lead');
+  if (!ref || !leadId) return;
+
+  const banner = document.getElementById('verifyBanner');
+  banner.style.display = 'block';
+  banner.innerHTML = `<div class="success-card"><div style="font-size:32px;margin-bottom:12px">⏳</div><div style="font-weight:700;font-size:16px">Verifying your payment...</div></div>`;
+
+  try {
+    const res = await fetch(`/api/leads/verify/${ref}`);
+    const data = await res.json();
+
+    if (data.success) {
+      banner.innerHTML = `
+        <div class="success-card">
+          <div style="font-size:40px;margin-bottom:12px">✅</div>
+          <div style="font-weight:900;font-size:20px;margin-bottom:16px">Payment confirmed! Here's your lead:</div>
+          <div style="text-align:left;background:var(--surface);border-radius:12px;padding:20px;line-height:2;font-size:14px">
+            <strong>Business:</strong> ${escapeHtml(data.lead.name)}<br>
+            <strong>Sector:</strong> ${escapeHtml(data.lead.sector)}<br>
+            <strong>Location:</strong> ${escapeHtml(data.lead.location)}<br>
+            <strong>Needs:</strong> ${escapeHtml(data.lead.digital_need)}<br>
+            <strong>Source:</strong> ${escapeHtml(data.lead.source)}<br>
+            <strong>How to reach:</strong> ${escapeHtml(data.lead.contact_hint)}
+          </div>
+          <div class="back-link" onclick="window.location='/leads.html'">← View more leads</div>
+        </div>
+      `;
+      // Clean URL
+      window.history.replaceState({}, '', '/leads.html');
+    } else {
+      banner.innerHTML = `<div class="success-card" style="border-color:#ef444433;background:#ef444411"><strong style="color:#ef4444">Payment could not be verified.</strong><br><span style="font-size:13px;color:var(--text-dim)">${escapeHtml(data.message)}</span></div>`;
+    }
+  } catch(e) {
+    banner.innerHTML = `<div class="success-card" style="border-color:#ef444433;background:#ef444411"><strong style="color:#ef4444">Error verifying payment. Contact support.</strong></div>`;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  checkVerify();
+  loadLeads();
+});
+</script>
+</body>
+</html>
