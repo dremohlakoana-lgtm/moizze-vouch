@@ -1,1 +1,300 @@
-{}
+{
+  "generated_at": "2026-07-30T18:56:00Z",
+  "scout": {
+    "label": "Worker 1 - Scout",
+    "description": "South African small businesses / startups needing digital services",
+    "data": [
+      {
+        "rank": 1,
+        "name": "Yoco",
+        "sector": "Fintech / Digital Payments",
+        "location": "Cape Town, SA",
+        "digital_need": "Online payment integrations, e-commerce tooling, POS digital upgrades",
+        "source": "StartupHub.ai Top SA Startups 2026"
+      },
+      {
+        "rank": 2,
+        "name": "SweepSouth",
+        "sector": "Home Services Marketplace",
+        "location": "Cape Town, SA",
+        "digital_need": "App development, SEO, digital marketing, customer loyalty systems",
+        "source": "StartupHub.ai Top SA Startups 2026"
+      },
+      {
+        "rank": 3,
+        "name": "Vagmine Tech IT Pty",
+        "sector": "IT Solutions",
+        "location": "Johannesburg, SA",
+        "digital_need": "Website redesign, digital presence, CRM systems",
+        "source": "StartupHub.ai Top SA Startups 2026"
+      },
+      {
+        "rank": 4,
+        "name": "Happy Hope Dweller",
+        "sector": "Agri-eCommerce / Online Retail",
+        "location": "Johannesburg, SA",
+        "digital_need": "E-commerce platform, digital marketing, logistics tech",
+        "source": "StartupHub.ai Top SA Startups 2026"
+      },
+      {
+        "rank": 5,
+        "name": "Regroup",
+        "sector": "Financial Services Platform",
+        "location": "Johannesburg, SA",
+        "digital_need": "Web design, fintech integrations, mobile app, brand identity",
+        "source": "StartupHub.ai Top SA Startups 2026"
+      }
+    ]
+  },
+  "pulse": {
+    "label": "Worker 2 - Pulse",
+    "description": "Top trending products selling in South Africa right now",
+    "data": [
+      {
+        "rank": 1,
+        "product": "Mobile Phone Accessories (Chargers, Covers, Wireless Earphones)",
+        "trend_reason": "SA consumers love gadgets; remote work and online classes drive demand. High Takealot volume.",
+        "source": "iKhokha High Demand Products SA / Takealot best-sellers"
+      },
+      {
+        "rank": 2,
+        "product": "Skincare & Beauty Products",
+        "trend_reason": "Glow-up culture booming in Mzansi. High repeat purchase, strong social media influence.",
+        "source": "iKhokha High Demand Products SA"
+      },
+      {
+        "rank": 3,
+        "product": "Air Fryers & Kitchen Gadgets",
+        "trend_reason": "Air fryers remain the MVP in SA households. Strong home-office lifestyle shift driving sales.",
+        "source": "iKhokha High Demand Products SA"
+      },
+      {
+        "rank": 4,
+        "product": "Baby Products (Clothes, Nappies, Nutrition)",
+        "trend_reason": "Growing birth rates + premium spending on infants. Steady demand with no downturn foreseen.",
+        "source": "iKhokha High Demand Products SA"
+      },
+      {
+        "rank": 5,
+        "product": "Home Office Furniture & Accessories",
+        "trend_reason": "Hybrid/remote work still prevalent. Desks, chairs, ergonomic products flying off shelves.",
+        "source": "iKhokha High Demand Products SA"
+      }
+    ]
+  },
+  "radar": {
+    "label": "Worker 3 - Radar",
+    "description": "Most in-demand jobs and skills in South Africa this week",
+    "data": [
+      {
+        "rank": 1,
+        "skill": "Software Development & IT",
+        "details": "118,000 unfilled digital roles nationally. 37% vacancy rate. AI, data engineering, cybersecurity and cloud computing hardest to fill. Junior devs earn R300K-R600K/yr.",
+        "research_score": "9.30/10",
+        "source": "Edstellar / OfferZen State of SA Developer Nation 2025"
+      },
+      {
+        "rank": 2,
+        "skill": "Engineering (Electrical, Mechanical, Civil)",
+        "details": "Only 15,000 registered engineers for 62M people. 38% of employers couldn't find engineers in 2025. Triple-digit vacancy growth in civil/structural roles.",
+        "research_score": "9.10/10",
+        "source": "Edstellar / Xpatweb Critical Skills Survey 2025"
+      },
+      {
+        "rank": 3,
+        "skill": "Healthcare & Nursing",
+        "details": "SA projected to be short 97,000 health workers. Losing 5,900 doctors/nurses per year from public facilities. NHI rollout will further spike demand.",
+        "research_score": "8.85/10",
+        "source": "Edstellar / Dept of Health Nursing Shortage Report"
+      },
+      {
+        "rank": 4,
+        "skill": "Renewable Energy (Solar PV, Wind, Battery Storage)",
+        "details": "SAREM targeting 3-5 GW new renewables per year. 86,531 FTE jobs created. 25,000 new jobs targeted by 2030. Strong demand for solar installers.",
+        "research_score": "8.65/10",
+        "source": "Edstellar / GreenCape REIPPPP Report 2025"
+      },
+      {
+        "rank": 5,
+        "skill": "Cybersecurity",
+        "details": "35,000 unfilled cybersecurity positions. Market growing 20% by 2025. 80% of SA companies hit by cyberattacks costing R2.2B/yr. POPIA compliance driving demand.",
+        "research_score": "8.45/10",
+        "source": "Edstellar / Xpatweb Critical Skills Survey"
+      }
+    ]
+  },
+  "hawk": {
+    "label": "Worker 4 - Hawk",
+    "description": "Overpriced products and market gaps in South Africa",
+    "data": [
+      {
+        "rank": 1,
+        "gap": "Affordable Cybersecurity Services for SMEs",
+        "details": "Most cybersecurity firms target enterprise. SA SMEs pay premium or go unprotected. Over 1,000 ransomware attacks/month. Gap: affordable, packaged cybersecurity for small businesses.",
+        "opportunity_size": "Large — 35,000 unfilled positions, growing market",
+        "source": "Lula / Interpol Africa Cyber Assessment Report"
+      },
+      {
+        "rank": 2,
+        "gap": "2.2 Million Unit Housing Shortage (Gap Market)",
+        "details": "South Africa faces a 2.2M property gap market. Affordable student housing, co-working spaces and eco-friendly housing developments are massively underserved.",
+        "opportunity_size": "Massive — R80B+ opportunity in real estate/property",
+        "source": "Lula / Real Estate Investor SA"
+      },
+      {
+        "rank": 3,
+        "gap": "Local Online Grocery Delivery",
+        "details": "SA online grocery market projected at R80 billion by 2026. Yet last-mile delivery in townships and peri-urban areas is almost nonexistent. Huge gap for local e-commerce fulfilment.",
+        "opportunity_size": "R80 billion market",
+        "source": "Lula Business Ideas SA / TechInAfrica"
+      },
+      {
+        "rank": 4,
+        "gap": "Digital Education & Corporate Training (EdTech)",
+        "details": "84% of SA large companies struggle to find skilled talent. Only 15,000 engineers for 62M people. Affordable online upskilling and certification programs massively underserved.",
+        "opportunity_size": "Large — skills gap across all sectors",
+        "source": "Edstellar / Xpatweb Critical Skills Survey"
+      },
+      {
+        "rank": 5,
+        "gap": "E-waste & Circular Economy Recycling",
+        "details": "SA government pushing circular economy. E-waste collection in suburban and township areas almost non-existent. Industrial recycling infrastructure underdeveloped.",
+        "opportunity_size": "Growing — government-backed circular economy push",
+        "source": "Lula Business Ideas SA / Engineering News"
+      }
+    ]
+  },
+  "echo": {
+    "label": "Worker 5 - Echo",
+    "description": "Top SA business news stories this week (July 2026)",
+    "data": [
+      {
+        "rank": 1,
+        "headline": "Big changes coming for electricity prices in South Africa",
+        "summary": "Eskom and NERSA signalling major electricity tariff restructuring. Businesses facing new cost models as SA's energy grid transitions post-load-shedding.",
+        "date": "July 30, 2026",
+        "source": "BusinessTech",
+        "url": "https://businesstech.co.za/news/energy/868204/big-changes-coming-for-electricity-prices-in-south-africa/"
+      },
+      {
+        "rank": 2,
+        "headline": "United States tariffs push R1 billion factory to shut down in South Africa",
+        "summary": "US trade tariffs forcing manufacturing closures. SA businesses feeling the squeeze from global trade wars. Cabinet approving key protective policies.",
+        "date": "July 29, 2026",
+        "source": "BusinessTech",
+        "url": "https://businesstech.co.za/news/business/867933/united-states-tariffs-push-r1-billion-factory-to-shut-down-in-south-africa/"
+      },
+      {
+        "rank": 3,
+        "headline": "Cabinet approves key policies on critical matters",
+        "summary": "Cabinet policy approvals covering expropriation, Special Economic Zones targeting R750B investment, and infrastructure spending of R46.7B over 3 years.",
+        "date": "July 30, 2026",
+        "source": "Business Day / Hansmeyer Associates"
+      },
+      {
+        "rank": 4,
+        "headline": "South African crypto giant cutting 20% of jobs",
+        "summary": "Luno (major SA crypto exchange) cutting 20% of workforce amid market challenges. Signal of crypto sector consolidation in SA.",
+        "date": "July 28, 2026",
+        "source": "BusinessTech",
+        "url": "https://businesstech.co.za/news/finance/867780/south-african-crypto-giant-cutting-20-of-jobs/"
+      },
+      {
+        "rank": 5,
+        "headline": "Good news about US tariffs on South Africa & SA rand eases on inflation data",
+        "summary": "Positive tariff developments for SA exports. SA Rand weakened ahead of July inflation reading and SARB monetary policy meeting. Inflation accelerated to 5% in June.",
+        "date": "July 30, 2026",
+        "source": "BusinessTech / Reuters",
+        "url": "https://businesstech.co.za/news/5-things/868039/good-news-about-us-tariffs-on-south-africa-and-major-changes-coming-to-whatsapp/"
+      }
+    ]
+  },
+  "vibe": {
+    "label": "Worker 6 - Vibe",
+    "description": "Viral trends on South African social media this week",
+    "data": [
+      {
+        "rank": 1,
+        "trend": "AI-Generated Content & Synthetic Influencers",
+        "platform": "TikTok / Instagram",
+        "details": "Brands in SA experimenting with synthetic influencers and AI-powered content creation. July 2026 saw major uptick in AI-generated product posts and brand AI avatars.",
+        "source": "Econsultancy Social Media Trends July 2026 / Hootsuite"
+      },
+      {
+        "rank": 2,
+        "trend": "Sketch to Reality Content",
+        "platform": "TikTok / Reels",
+        "details": "Trending transition video format: drawing/sketching something that morphs into real-life footage. Hugely viral in SA creator community in July 2026.",
+        "source": "Instagram Social Media Trends July 2026"
+      },
+      {
+        "rank": 3,
+        "trend": "World Cup Fan Culture Engagement",
+        "platform": "Twitter/X / TikTok",
+        "details": "With Football World Cup 2026 in full swing (hosted in US/Canada/Mexico), SA Twitter/X extremely active with Bafana Bafana support content, watch parties and fan reactions.",
+        "source": "Econsultancy Social Media Trends July 2026"
+      },
+      {
+        "rank": 4,
+        "trend": "Episodic Brand Storytelling",
+        "platform": "Instagram / LinkedIn",
+        "details": "SA brands adopting serialised content formats - multi-episode brand stories on Instagram and LinkedIn. Drives follow-through engagement. Growing among SA SME brands.",
+        "source": "Instagram July 2026 Trends / BrandNation LinkedIn"
+      },
+      {
+        "rank": 5,
+        "trend": "#AvozillaChallenge / Giant Avocado Reaction Content",
+        "platform": "TikTok / Twitter/X",
+        "details": "Woolworths' viral 1kg 'Avozilla' avocado taking SA social media by storm. Reaction videos, cooking challenges, and unboxings dominating SA TikTok this week.",
+        "source": "BusinessTech July 28, 2026"
+      }
+    ]
+  },
+  "hunter": {
+    "label": "Worker 7 - Hunter",
+    "description": "Open tenders and government grants available to SA businesses",
+    "data": [
+      {
+        "rank": 1,
+        "opportunity": "SEDFA (Small Enterprise Development and Finance Agency)",
+        "type": "Government Grant / Loan",
+        "details": "SEDFA (merged SEDA + SEFA) offers integrated funding and development support for small businesses. Loans and grants from R50,000 to R15 million for qualifying SMEs.",
+        "how_to_apply": "Apply via www.sedfa.org.za",
+        "source": "SEDFA Annual Performance Plan 2025-26 / SEFA grants"
+      },
+      {
+        "rank": 2,
+        "opportunity": "REIPPPP Renewable Energy Procurement (Bid Window 6)",
+        "type": "Government Procurement Tender",
+        "details": "SA targets 3-5 GW of new renewables per year. Open procurement rounds for Independent Power Producers. Sub-contracting and B-BBEE supplier opportunities in construction and maintenance.",
+        "how_to_apply": "Via IPPPP Office, Dept of Mineral Resources and Energy",
+        "source": "GreenCape SAREM Market Intelligence 2025"
+      },
+      {
+        "rank": 3,
+        "opportunity": "Smart City Solutions Tender - City of Johannesburg",
+        "type": "Government Tender",
+        "details": "Panel of Service Providers to Deliver Smart City Solutions to the City of Johannesburg over a 3-year period. Tech, digital, and IoT solutions for urban management.",
+        "tender_number": "A41-2020/2021 (ongoing panels sought)",
+        "how_to_apply": "via eTenders / TenderBulletins.co.za",
+        "source": "TenderBulletins.co.za"
+      },
+      {
+        "rank": 4,
+        "opportunity": "Special Economic Zone (SEZ) Investment Grants",
+        "type": "Government Grant / Investment Incentive",
+        "details": "SA aims to attract R750 billion in SEZ investment by April (announced July 2026). Tax incentives, infrastructure support and preferential rates for businesses in designated SEZs.",
+        "how_to_apply": "Apply via DTIC (Dept of Trade, Industry and Competition) SEZ Office",
+        "source": "Hansmeyer Associates Financial News July 20, 2026"
+      },
+      {
+        "rank": 5,
+        "opportunity": "SA Government Cybersecurity & IT Services Tenders",
+        "type": "Government Tender",
+        "details": "KwaZulu-Natal Legislature and other state entities continuously tender for cybersecurity, ERP upgrades, server monitoring, and IT security critical controls implementation. 6-month and 3-year contracts.",
+        "how_to_apply": "via eTenders Portal / TenderBulletins.co.za",
+        "source": "TenderBulletins.co.za"
+      }
+    ]
+  }
+}
