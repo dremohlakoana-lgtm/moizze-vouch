@@ -41,27 +41,7 @@
   </style>
 </head>
 <body>
-<!-- Cold-start loading overlay -->
-<div id="coldStartOverlay" style="
-  display:none;
-  position:fixed;top:0;left:0;right:0;bottom:0;
-  background:var(--bg,#0f0f0f);
-  z-index:9999;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:24px;
-">
-  <div style="font-size:36px;font-weight:900;background:linear-gradient(135deg,#7c6bff,#b89cff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Moizze</div>
-  <div style="width:48px;height:48px;border:4px solid rgba(124,107,255,0.2);border-top-color:#7c6bff;border-radius:50%;animation:spin 0.8s linear infinite"></div>
-  <div style="color:#888;font-size:14px;text-align:center;max-width:260px;line-height:1.6" id="coldStartMsg">Starting up the server…<br><span style="font-size:12px;opacity:0.6">Free tier servers sleep to save resources. This may take up to 60 seconds.</span></div>
-  <div style="width:240px;height:4px;background:rgba(124,107,255,0.15);border-radius:99px;overflow:hidden">
-    <div id="coldStartBar" style="height:100%;background:#7c6bff;width:0%;transition:width 1s linear;border-radius:99px"></div>
-  </div>
-</div>
-<style>
-  @keyframes spin { to { transform:rotate(360deg); } }
-</style>
+
 <div class="landing-hero">
   <div class="landing-split">
     <div class="landing-left">
@@ -144,53 +124,6 @@
 </div>
 
 <script src="/js/app.js"></script>
-<script>
-(function() {
-  // Ping the server health endpoint; show overlay if it takes >1.5s
-  let overlayShown = false;
-  let startTime = Date.now();
-  let barInterval;
-
-  function showOverlay() {
-    if (overlayShown) return;
-    overlayShown = true;
-    const overlay = document.getElementById('coldStartOverlay');
-    overlay.style.display = 'flex';
-    let pct = 0;
-    barInterval = setInterval(() => {
-      pct = Math.min(pct + (100 / 60), 95); // fill over ~60s
-      document.getElementById('coldStartBar').style.width = pct + '%';
-    }, 1000);
-  }
-
-  function hideOverlay() {
-    const overlay = document.getElementById('coldStartOverlay');
-    if (!overlay) return;
-    document.getElementById('coldStartBar').style.width = '100%';
-    clearInterval(barInterval);
-    setTimeout(() => { overlay.style.display = 'none'; }, 400);
-  }
-
-  const slowTimer = setTimeout(showOverlay, 1500);
-
-  fetch('/api/health', { cache: 'no-store' })
-    .then(r => r.json())
-    .then(d => {
-      clearTimeout(slowTimer);
-      if (d && d.success) hideOverlay();
-    })
-    .catch(() => {
-      // Server down — keep retrying
-      function retry() {
-        fetch('/api/health', { cache: 'no-store' })
-          .then(r => r.json())
-          .then(d => { if (d && d.success) hideOverlay(); else setTimeout(retry, 3000); })
-          .catch(() => setTimeout(retry, 3000));
-      }
-      setTimeout(retry, 3000);
-    });
-})();
-</script>
 <script>
   // Redirect if already logged in
   if (Auth.isLoggedIn()) {
