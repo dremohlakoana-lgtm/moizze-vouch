@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T18:56:00Z",
+  "generated_at": "2026-07-30T19:41:07Z",
   "scout": {
     "label": "Worker 1 - Scout",
     "description": "South African small businesses / startups needing digital services",
@@ -131,14 +131,14 @@
         "rank": 1,
         "gap": "Affordable Cybersecurity Services for SMEs",
         "details": "Most cybersecurity firms target enterprise. SA SMEs pay premium or go unprotected. Over 1,000 ransomware attacks/month. Gap: affordable, packaged cybersecurity for small businesses.",
-        "opportunity_size": "Large — 35,000 unfilled positions, growing market",
+        "opportunity_size": "Large \u2014 35,000 unfilled positions, growing market",
         "source": "Lula / Interpol Africa Cyber Assessment Report"
       },
       {
         "rank": 2,
         "gap": "2.2 Million Unit Housing Shortage (Gap Market)",
         "details": "South Africa faces a 2.2M property gap market. Affordable student housing, co-working spaces and eco-friendly housing developments are massively underserved.",
-        "opportunity_size": "Massive — R80B+ opportunity in real estate/property",
+        "opportunity_size": "Massive \u2014 R80B+ opportunity in real estate/property",
         "source": "Lula / Real Estate Investor SA"
       },
       {
@@ -152,14 +152,14 @@
         "rank": 4,
         "gap": "Digital Education & Corporate Training (EdTech)",
         "details": "84% of SA large companies struggle to find skilled talent. Only 15,000 engineers for 62M people. Affordable online upskilling and certification programs massively underserved.",
-        "opportunity_size": "Large — skills gap across all sectors",
+        "opportunity_size": "Large \u2014 skills gap across all sectors",
         "source": "Edstellar / Xpatweb Critical Skills Survey"
       },
       {
         "rank": 5,
         "gap": "E-waste & Circular Economy Recycling",
         "details": "SA government pushing circular economy. E-waste collection in suburban and township areas almost non-existent. Industrial recycling infrastructure underdeveloped.",
-        "opportunity_size": "Growing — government-backed circular economy push",
+        "opportunity_size": "Growing \u2014 government-backed circular economy push",
         "source": "Lula Business Ideas SA / Engineering News"
       }
     ]
@@ -294,6 +294,220 @@
         "details": "KwaZulu-Natal Legislature and other state entities continuously tender for cybersecurity, ERP upgrades, server monitoring, and IT security critical controls implementation. 6-month and 3-year contracts.",
         "how_to_apply": "via eTenders Portal / TenderBulletins.co.za",
         "source": "TenderBulletins.co.za"
+      }
+    ]
+  },
+  "dropship": {
+    "label": "Dropship",
+    "description": "Hot dropshipping products globally right now",
+    "data": [
+      {
+        "rank": 1,
+        "product": "Facial Ice Bath Bowl",
+        "estimated_profit_margin": "~80% ($5.78 cost \u2192 $29.99 sell = $24.21 profit per unit)",
+        "best_platform": "Shopify + TikTok Shop",
+        "why_trending": "Ice bathing is going viral globally via influencers like Ashton Hall. The skincare community is obsessed with cold therapy for reducing pores and inflammation. Surging Google Trends, perfect for short-form video demos.",
+        "source": "Tradelle.io Viral Products 2026"
+      },
+      {
+        "rank": 2,
+        "product": "Rain Cloud Aroma Diffuser",
+        "estimated_profit_margin": "~70% ($16.79 cost \u2192 $54.99 sell = $38.20 profit per unit)",
+        "best_platform": "Shopify + TikTok Shop + Instagram",
+        "why_trending": "Aesthetic home decor is dominating TikTok. This dripping rain-cloud diffuser is visually mesmerizing \u2014 perfect content bait. Doubles as a humidifier with mood lighting. Peaks at Christmas but sells year-round.",
+        "source": "Tradelle.io Viral Products 2026"
+      },
+      {
+        "rank": 3,
+        "product": "Magnetic Water Bottle Bag for Gym",
+        "estimated_profit_margin": "~82% ($6.98 cost \u2192 $39.99 sell = $33.01 profit per unit)",
+        "best_platform": "Shopify + TikTok Shop",
+        "why_trending": "Fitness and gym culture is booming. This solves a real pain point \u2014 hands-free hydration. Strong year-round demand, excellent wow-factor for video ads. Top scores across profit, saturation, and market fit.",
+        "source": "Tradelle.io Viral Products 2026"
+      },
+      {
+        "rank": 4,
+        "product": "Scent Necklace (Aromatherapy Pendant)",
+        "estimated_profit_margin": "~93% ($1.12 cost \u2192 $14.99 sell = $13.87 profit per unit)",
+        "best_platform": "Shopify + TikTok Shop + Etsy",
+        "why_trending": "Heartfelt gift products dominate social media. Huge spikes around Valentine's Day and Christmas. Ultra-low cost, ultra-high margin. Viral shareability is extreme. Gift niche never dies.",
+        "source": "Tradelle.io Viral Products 2026"
+      },
+      {
+        "rank": 5,
+        "product": "Self-Cleaning Hairbrush",
+        "estimated_profit_margin": "~91% ($1.79 cost \u2192 $19.99 sell = $18.20 profit per unit)",
+        "best_platform": "Shopify + TikTok Shop + Amazon",
+        "why_trending": "Hair care is evergreen. This solves the universal annoyance of cleaning hairbrushes with a one-tap mechanism. Satisfying demo videos go viral instantly. Strong Google Trends demand year-round with Christmas spike.",
+        "source": "Tradelle.io Viral Products 2026"
+      }
+    ]
+  },
+  "kidstube": {
+    "label": "KidsTube",
+    "description": "YouTube kids content ideas getting millions of views",
+    "data": [
+      {
+        "rank": 1,
+        "video_idea": "Roblox Game Walkthroughs & Funny Moments Compilation",
+        "title_example": "\"We Tried The HARDEST Roblox Games! (Grow a Garden & Steal A Brainrot)\"",
+        "target_age_group": "7-12 years",
+        "why_it_works": "Roblox is the #1 trending kids topic on YouTube in 2025-2026. 'Grow a Garden' and 'Steal A Brainrot' are breakout hits. Roblox itself is pilot-testing YouTube Shorts-style features, proving kids are obsessed. Game walkthroughs + funny reaction content = repeat watch guarantee.",
+        "estimated_views_potential": "500K - 50M+ views per video",
+        "source": "Kidscreen / YouTube Year in Review 2025"
+      },
+      {
+        "rank": 2,
+        "video_idea": "3D Animated Nursery Rhymes & Educational Songs",
+        "title_example": "\"ABC Song + 10 Baby Shark Friends! | Fun Learning Songs for Kids\"",
+        "target_age_group": "0-5 years",
+        "why_it_works": "Cocomelon has 176M subscribers and dominates this space. The format works because parents put it on repeat. 3D animation + catchy songs = algorithmic goldmine. YouTube favors this category heavily. New channels are breaking through consistently with quality animation.",
+        "estimated_views_potential": "1M - 500M+ views (channel cumulative)",
+        "source": "Statista Most Subscribed Kids Channels July 2026 / amraandelma.com"
+      },
+      {
+        "rank": 3,
+        "video_idea": "MrBeast-Style Kids Challenge Videos",
+        "title_example": "\"Last Kid Standing Wins R10,000 | Ultimate Playground Challenge\"",
+        "target_age_group": "8-14 years",
+        "why_it_works": "MrBeast is #1 on YouTube for the 6th year running with 510M+ subscribers. His format (big challenges, giveaways, high stakes) is replicable at smaller budget. Kids love this format. Localized versions (SA version, African version) have low competition vs global creators.",
+        "estimated_views_potential": "100K - 10M+ views per video",
+        "source": "Kidscreen / YouTube Creator Rankings 2025-2026"
+      },
+      {
+        "rank": 4,
+        "video_idea": "K-Pop / Animated Music Video Fan Content & Reactions",
+        "title_example": "\"Reacting to KPop Demon Hunters 'Golden' MV for the First Time!\"",
+        "target_age_group": "9-15 years",
+        "why_it_works": "KPop Demon Hunters had 4 songs in YouTube's top 10 for 2025. Fan-made reaction videos, cosplay, and edits are racking up millions of views. This is an underserved reaction niche \u2014 most reactors are adults, but tweens want relatable tween reactors.",
+        "estimated_views_potential": "200K - 5M+ views per video",
+        "source": "Kidscreen / YouTube Top Songs 2025"
+      },
+      {
+        "rank": 5,
+        "video_idea": "Labubu & Collectible Toy Unboxing / Review Videos",
+        "title_example": "\"I Opened 20 Labubu Mystery Boxes! RARE Find Inside?! \ud83c\udf81\"",
+        "target_age_group": "6-13 years",
+        "why_it_works": "Labubu (Pop Mart's ugly-cute plush) was a massive trending topic on YouTube in 2025. Both kids and kidults/collectors are obsessed. Unboxing mystery boxes is a proven YouTube format. Disney and MGA are now making competitors \u2014 the category is only growing.",
+        "estimated_views_potential": "300K - 8M+ views per video",
+        "source": "Kidscreen / YouTube Year in Review 2025"
+      }
+    ]
+  },
+  "digital": {
+    "label": "Digital",
+    "description": "Trending digital products people are buying online right now",
+    "data": [
+      {
+        "rank": 1,
+        "product_type": "AI Productivity & Skills Ebooks",
+        "product_name": "\"How to Use AI for Your Business/Job\" Guides",
+        "where_to_sell": "Amazon KDP, Gumroad, Etsy, Payhip",
+        "price_range": "$9.99 - $19.99 (R180 - R360)",
+        "demand_level": "EXPLOSIVE \u2014 AI-related ebook searches doubled year-on-year per Google Trends",
+        "why_trending": "Everyone wants to learn AI but most courses are too technical. Non-technical guides for marketers, writers, HR professionals are the fastest-growing ebook category in 2026. Can be created in 1 day using AI tools.",
+        "source": "InkfluenceAI.com / Whop.com Digital Products 2026"
+      },
+      {
+        "rank": 2,
+        "product_type": "Notion Templates & Productivity Systems",
+        "product_name": "Notion dashboards, habit trackers, CRM templates, project management systems",
+        "where_to_sell": "Notion Marketplace, Etsy, Gumroad",
+        "price_range": "$19 - $79 (R340 - R1,430)",
+        "demand_level": "HIGH \u2014 Notion ecosystem growing fast, dedicated marketplace with built-in traffic",
+        "why_trending": "Remote workers and entrepreneurs obsessed with productivity systems. One template can sell thousands of times with zero marginal cost. Strong word-of-mouth sharing in productivity communities on Twitter/X and Reddit.",
+        "source": "InkfluenceAI.com / Printful.com Digital Products 2026"
+      },
+      {
+        "rank": 3,
+        "product_type": "Mental Health & CBT Workbooks (Printable)",
+        "product_name": "Anxiety journals, CBT worksheets, self-therapy guides, journaling prompt packs",
+        "where_to_sell": "Etsy (strongest channel), Gumroad, Payhip",
+        "price_range": "$9.99 - $24.99 (R180 - R450)",
+        "demand_level": "HIGH & GROWING \u2014 Mental health awareness surging globally post-pandemic",
+        "why_trending": "Therapy is expensive and inaccessible for most people. Printable workbooks offer a self-help alternative. Etsy buyers trust this category heavily. Clinical-quality content commands premium pricing. Repeat buyers are common.",
+        "source": "InkfluenceAI.com Top Ebook Niches 2026"
+      },
+      {
+        "rank": 4,
+        "product_type": "AI Skills Courses for Non-Technical Professionals",
+        "product_name": "\"ChatGPT for Marketers,\" \"AI for Writers,\" \"Automate Your Business with AI\"",
+        "where_to_sell": "Teachable, Kajabi, Gumroad, Udemy",
+        "price_range": "$99 - $499 (R1,800 - R9,000)",
+        "demand_level": "MASSIVE \u2014 Huge demand, low supply of genuinely good quality courses",
+        "why_trending": "Every professional needs to upskill in AI but most content is too technical. Courses targeting specific job roles (marketers, HR, finance professionals) have massive organic demand. Highest margin digital product category.",
+        "source": "InkfluenceAI.com / Whop.com Digital Products 2026"
+      },
+      {
+        "rank": 5,
+        "product_type": "Social Media Content Calendar Templates",
+        "product_name": "Monthly Instagram/TikTok/LinkedIn content planners and caption bundles",
+        "where_to_sell": "Etsy, Gumroad, Creative Market",
+        "price_range": "$9 - $29 (R160 - R520)",
+        "demand_level": "HIGH \u2014 Every small business owner and content creator needs this",
+        "why_trending": "Content creation pressure is at an all-time high. Small businesses and solo creators are constantly looking for ready-made content systems. Templates for specific niches (restaurants, beauty, fitness studios) command premium pricing.",
+        "source": "InkfluenceAI.com / Printful.com Templates 2026"
+      }
+    ]
+  },
+  "flips": {
+    "label": "Flips",
+    "description": "Buy low sell high flip opportunities in South Africa",
+    "data": [
+      {
+        "rank": 1,
+        "item": "Limited Edition / Hyped Sneakers (Nike, Jordan, Adidas Yeezy)",
+        "buy_price_zar": "R1,200 - R2,500 (retail, queuing at stores or online drops)",
+        "sell_price_zar": "R3,500 - R8,000+ (resell market)",
+        "estimated_profit": "R1,000 - R5,500+ per pair",
+        "where_to_buy": "Nike SA / Adidas SA online drops, Sportscene, Sneaker Lab queues",
+        "where_to_sell": "Sneaker Love (sneakerlove.co.za), OLX, Facebook Marketplace, Instagram DMs",
+        "why_it_works": "SA sneaker culture is strong and growing. The secondary market is booming on platforms like Sneaker Love. Limited releases sell out instantly and command 200-400% markups. Even old stock Jordans and Yeezys hold value.",
+        "source": "IOL / Sneaker Love SA / iKhokha High Demand Products SA"
+      },
+      {
+        "rank": 2,
+        "item": "PlayStation 5 (PS5) Slim & Gaming Bundles",
+        "buy_price_zar": "R9,000 - R12,000 (Makro/Takealot when in stock)",
+        "sell_price_zar": "R13,000 - R16,000 (Facebook, OLX)",
+        "estimated_profit": "R2,000 - R5,000 per unit",
+        "where_to_buy": "Makro, Takealot, Game, Cash Crusaders (second-hand)",
+        "where_to_sell": "Gumtree, Facebook Marketplace, OLX, MobiTraderSA",
+        "why_it_works": "Gaming consoles are consistently high-demand in SA. PS5 stock fluctuates, causing price spikes. Bundles (console + games + extra controller) command premium prices. Cash Crusaders buys consoles cheap \u2014 can flip for profit.",
+        "source": "Gumtree SA / iKhokha High Demand SA / MobiTraderSA"
+      },
+      {
+        "rank": 3,
+        "item": "Labubu & Pop Mart Mystery Box Collectibles",
+        "buy_price_zar": "R350 - R600 (retail at Pop Mart SA / Bash.com)",
+        "sell_price_zar": "R900 - R3,000+ (rare figures)",
+        "estimated_profit": "R300 - R2,400+ per figure",
+        "where_to_buy": "Pop Mart SA (V&A Waterfront, Sandton City), Bash.com, Takealot",
+        "where_to_sell": "Facebook Marketplace, Instagram, TikTok Shop (unboxing + sell), Bidorbuy",
+        "why_it_works": "Labubu was 2025's biggest collectible trend globally and in SA. Rare pulls from mystery boxes can 5-10x retail. The kidult/collector market is active and willing to pay premiums. Instagram unboxing content doubles as marketing.",
+        "source": "Kidscreen / YouTube Trends 2025 / Pop Mart SA"
+      },
+      {
+        "rank": 4,
+        "item": "Refurbished MacBooks & iPhones",
+        "buy_price_zar": "R4,000 - R8,000 (Cash Crusaders, OLX, private sellers)",
+        "sell_price_zar": "R7,000 - R14,000 (refurbished market)",
+        "estimated_profit": "R2,000 - R6,000 per device",
+        "where_to_buy": "Cash Crusaders, Cashbuild, Facebook Marketplace, Gumtree (negotiate hard)",
+        "where_to_sell": "SellYourPC.co.za, OLX, Facebook Marketplace, Instagram, BidOrBuy",
+        "why_it_works": "Apple products hold resale value extremely well. SA has a massive aspirational market that can't afford new Apple prices but will pay for refurbished. Buy at pawn shops or from private sellers, clean/restore, and flip. iPhone 13/14 models are sweet spot.",
+        "source": "SellYourPC.co.za / iKhokha High Demand SA / Cash Crusaders"
+      },
+      {
+        "rank": 5,
+        "item": "Air Fryers (Branded, Like-New Second-Hand)",
+        "buy_price_zar": "R400 - R800 (Facebook Marketplace, Gumtree, estate sales)",
+        "sell_price_zar": "R1,200 - R2,500 (OLX, Facebook)",
+        "estimated_profit": "R500 - R1,500 per unit",
+        "where_to_buy": "Facebook Marketplace, Gumtree, church/school flea markets, estate clearances",
+        "where_to_sell": "OLX, Facebook Marketplace, Takealot Seller (new units), local WhatsApp groups",
+        "why_it_works": "Air fryers are SA's #1 trending kitchen product. Many households buy them and barely use them \u2014 creating cheap second-hand supply. Clean, rebox, and flip. New branded units bought on sale at Game/Makro can also be resold for profit when they go out of stock.",
+        "source": "iKhokha Top SA Products / IOL SA Middle Class Spending"
       }
     ]
   }
