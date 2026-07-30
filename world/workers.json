@@ -2,47 +2,16 @@
   "last_run": "2026-07-30T18:56:00Z",
   "completed_at": "2026-07-30T19:05:00Z",
   "workers": {
-    "scout": {
-      "status": "complete",
-      "last_run": "2026-07-30T18:56:00Z",
-      "completed_at": "2026-07-30T19:05:00Z",
-      "items_found": 5
-    },
-    "pulse": {
-      "status": "complete",
-      "last_run": "2026-07-30T18:56:00Z",
-      "completed_at": "2026-07-30T19:05:00Z",
-      "items_found": 5
-    },
-    "radar": {
-      "status": "complete",
-      "last_run": "2026-07-30T18:56:00Z",
-      "completed_at": "2026-07-30T19:05:00Z",
-      "items_found": 5
-    },
-    "hawk": {
-      "status": "complete",
-      "last_run": "2026-07-30T18:56:00Z",
-      "completed_at": "2026-07-30T19:05:00Z",
-      "items_found": 5
-    },
-    "echo": {
-      "status": "complete",
-      "last_run": "2026-07-30T18:56:00Z",
-      "completed_at": "2026-07-30T19:05:00Z",
-      "items_found": 5
-    },
-    "vibe": {
-      "status": "complete",
-      "last_run": "2026-07-30T18:56:00Z",
-      "completed_at": "2026-07-30T19:05:00Z",
-      "items_found": 5
-    },
-    "hunter": {
-      "status": "complete",
-      "last_run": "2026-07-30T18:56:00Z",
-      "completed_at": "2026-07-30T19:05:00Z",
-      "items_found": 5
-    }
+    "scout":    { "status": "complete", "items_found": 5 },
+    "pulse":    { "status": "complete", "items_found": 5 },
+    "radar":    { "status": "complete", "items_found": 5 },
+    "hawk":     { "status": "complete", "items_found": 5 },
+    "echo":     { "status": "complete", "items_found": 5 },
+    "vibe":     { "status": "complete", "items_found": 5 },
+    "hunter":   { "status": "complete", "items_found": 5 },
+    "dropship": { "status": "idle", "items_found": 0 },
+    "kidstube": { "status": "idle", "items_found": 0 },
+    "digital":  { "status": "idle", "items_found": 0 },
+    "flips":    { "status": "idle", "items_found": 0 }
   }
 }
