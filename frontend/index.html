@@ -248,32 +248,17 @@ const PAIRS = [
 async function loadForex() {
   const grid = document.getElementById('forexGrid');
   try {
-    // Use frankfurter.app — free, no key needed
-    const res = await fetch('https://api.frankfurter.app/latest?from=ZAR&to=USD,EUR,GBP,CNY,AUD');
+    const res = await fetch('/api/forex');
     const data = await res.json();
-
-    // Invert rates (we want ZAR per foreign unit)
-    const rates = {};
-    for (const [currency, rate] of Object.entries(data.rates)) {
-      rates[currency] = (1 / rate).toFixed(4);
-    }
-
-    // BTC price in ZAR via Coinbase
-    let btcZar = null;
-    try {
-      const btcRes = await fetch('https://api.coinbase.com/v2/prices/BTC-ZAR/spot');
-      const btcData = await btcRes.json();
-      btcZar = parseFloat(btcData.data.amount).toLocaleString('en-ZA', { maximumFractionDigits: 0 });
-    } catch(e) {}
+    if (!data.success) throw new Error();
+    const rates = data.rates;
 
     grid.innerHTML = PAIRS.map(p => {
-      let rate, display;
+      let rate;
       if (p.base === 'BTC') {
-        rate = btcZar ? 'R ' + btcZar : '—';
-        display = '';
+        rate = rates['BTC'] ? 'R ' + parseFloat(rates['BTC']).toLocaleString('en-ZA', {maximumFractionDigits:0}) : '—';
       } else {
-        rate = 'R ' + rates[p.base];
-        display = '';
+        rate = rates[p.base] ? 'R ' + rates[p.base] : '—';
       }
       return `
         <div class="forex-card">
@@ -283,9 +268,9 @@ async function loadForex() {
       `;
     }).join('');
 
-    document.getElementById('forexUpdated').textContent = 'Updated: ' + new Date().toLocaleTimeString('en-ZA');
+    document.getElementById('forexUpdated').textContent = 'Rates updated: ' + new Date().toLocaleTimeString('en-ZA');
   } catch(e) {
-    grid.innerHTML = '<div class="forex-card" style="grid-column:1/-1;text-align:center;color:var(--text-dim)">Could not load rates. Try refreshing.</div>';
+    grid.innerHTML = '<div class="forex-card" style="grid-column:1/-1;text-align:center;color:var(--text-dim);padding:20px">Rates loading...</div>';
   }
 }
 
@@ -331,10 +316,11 @@ async function loadReport() {
     const res = await fetch('/world/report-latest.json?t=' + Date.now());
     const report = res.ok ? await res.json() : null;
 
-    if (report && report.week) {
-      document.getElementById('weekBadge').textContent = '📅 Week ' + report.week;
-      document.getElementById('lastRunText').textContent =
-        'Last run: ' + new Date(report.generated).toLocaleDateString('en-ZA', { weekday:'long', day:'numeric', month:'short', year:'numeric' });
+    const generated = report && (report.generated_at || report.generated);
+    if (generated) {
+      const d = new Date(generated);
+      document.getElementById('weekBadge').textContent = '📅 Last run: ' + d.toLocaleDateString('en-ZA', { day:'numeric', month:'short', year:'numeric' });
+      document.getElementById('lastRunText').textContent = 'Last run: ' + d.toLocaleDateString('en-ZA', { weekday:'long', day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
     } else {
       document.getElementById('weekBadge').textContent = 'Waiting for first run...';
       document.getElementById('lastRunText').textContent = 'Not run yet — first run this Monday 6AM SA';
@@ -349,13 +335,16 @@ async function loadReport() {
 function renderWorkers(report) {
   const grid = document.getElementById('workersGrid');
   grid.innerHTML = WORKERS_META.map(w => {
-    const data = report && report[w.key] ? report[w.key] : null;
+    const section = report && report[w.key] ? report[w.key] : null;
+    // data is nested inside section.data array
+    const data = section && Array.isArray(section.data) ? section.data
+                : section && Array.isArray(section) ? section : null;
     const done = !!data;
 
-    const items = done && Array.isArray(data) ? data.map(item => `
+    const items = done ? data.map(item => `
       <div class="result-item">
-        <div class="result-title">${escapeHtml(item.title || item.name || item.headline || item.topic || item.product || Object.values(item)[0] || '')}</div>
-        <div class="result-detail">${escapeHtml(item.detail || item.summary || item.description || item.reason || item.location || Object.values(item)[1] || '')}</div>
+        <div class="result-title">${escapeHtml(item.name || item.title || item.headline || item.topic || item.product || item.job_title || Object.values(item).find(v => typeof v === 'string') || '')}</div>
+        <div class="result-detail">${escapeHtml(item.digital_need || item.trend_reason || item.summary || item.description || item.reason || item.location || item.sector || item.deadline || item.value || Object.values(item).filter(v => typeof v === 'string')[1] || '')}</div>
       </div>
     `).join('') : `<div class="empty-worker">⏳ ${w.name} reports every Monday.<br>Check back after 6AM SA time.</div>`;
 

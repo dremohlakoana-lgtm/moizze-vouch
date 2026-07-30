@@ -19,6 +19,40 @@ app.get('/api/health', (req, res) => {
   res.json({ success: true, status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// ─── Forex Proxy (avoids browser CORS issues) ────────────────────────────────
+app.get('/api/forex', async (req, res) => {
+  try {
+    const https = require('https');
+    const fetch = (url) => new Promise((resolve, reject) => {
+      https.get(url, (r) => {
+        let data = '';
+        r.on('data', c => data += c);
+        r.on('end', () => resolve(JSON.parse(data)));
+      }).on('error', reject);
+    });
+
+    const [fxData, btcData] = await Promise.allSettled([
+      fetch('https://api.frankfurter.app/latest?from=ZAR&to=USD,EUR,GBP,CNY,AUD'),
+      fetch('https://api.coinbase.com/v2/prices/BTC-ZAR/spot')
+    ]);
+
+    const rates = {};
+    if (fxData.status === 'fulfilled') {
+      for (const [currency, rate] of Object.entries(fxData.value.rates)) {
+        rates[currency] = (1 / rate).toFixed(4);
+      }
+    }
+
+    if (btcData.status === 'fulfilled') {
+      rates['BTC'] = parseFloat(btcData.value.data.amount).toFixed(0);
+    }
+
+    res.json({ success: true, rates, updated: new Date().toISOString() });
+  } catch (e) {
+    res.status(500).json({ success: false, message: 'Forex unavailable' });
+  }
+});
+
 // ─── Fallback ─────────────────────────────────────────────────────────────────
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
