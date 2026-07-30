@@ -1,0 +1,12 @@
+{
+  "last_run": "2026-07-30T18:56:00Z",
+  "workers": {
+    "scout": { "status": "working", "last_run": "2026-07-30T18:56:00Z" },
+    "pulse": { "status": "working", "last_run": "2026-07-30T18:56:00Z" },
+    "radar": { "status": "working", "last_run": "2026-07-30T18:56:00Z" },
+    "hawk": { "status": "working", "last_run": "2026-07-30T18:56:00Z" },
+    "echo": { "status": "working", "last_run": "2026-07-30T18:56:00Z" },
+    "vibe": { "status": "working", "last_run": "2026-07-30T18:56:00Z" },
+    "hunter": { "status": "working", "last_run": "2026-07-30T18:56:00Z" }
+  }
+}

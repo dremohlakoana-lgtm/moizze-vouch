@@ -39,6 +39,9 @@ app.use('/api/auth/', authLimiter);
 // ─── Serve Static Frontend ────────────────────────────────────────────────────
 app.use(express.static(path.join(__dirname, 'frontend')));
 
+// ─── Serve World Reports ─────────────────────────────────────────────────────
+app.use('/world', express.static(path.join(__dirname, 'world')));
+
 // ─── API Routes ───────────────────────────────────────────────────────────────
 const authRoutes = require('./backend/routes/auth');
 const walletRoutes = require('./backend/routes/wallet');
