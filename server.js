@@ -66,12 +66,29 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, message: 'Internal server error.' });
 });
 
+// ─── Keep-Alive Self Ping (fights Render free tier spin-down) ───────────────
+function startKeepAlive() {
+  const appUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+  // Ping every 14 minutes (Render spins down after 15 min of inactivity)
+  setInterval(async () => {
+    try {
+      const https = appUrl.startsWith('https') ? require('https') : require('http');
+      https.get(`${appUrl}/api/health`, (res) => {
+        // consume response
+        res.resume();
+      }).on('error', () => {}); // silently ignore errors
+    } catch (e) {}
+  }, 14 * 60 * 1000);
+  console.log(`🔄 Keep-alive ping every 14 min → ${appUrl}/api/health`);
+}
+
 // ─── Start Server ─────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`\n🏦 Moizze Vouch Banking Server`);
   console.log(`✅ Running on port ${PORT}`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔗 http://localhost:${PORT}\n`);
+  if (process.env.NODE_ENV === 'production') startKeepAlive();
 });
 
 module.exports = app;
